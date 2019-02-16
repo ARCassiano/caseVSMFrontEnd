@@ -1,0 +1,62 @@
+<div class="container-fluid">
+
+  <form class="contato-form" *ngIf="contato">
+    <div class="row">
+      
+      <div class="col-md-6">
+        <mat-form-field class="col-md-12">
+          <input matInput placeholder="Nome" name="nome" [(ngModel)]="contato.nome">
+        </mat-form-field>
+      </div>
+  
+      <div class="col-md-3">
+        <mat-form-field class="CPF col-md-12">
+            <input matInput placeholder="CPF" name="cpf" [(ngModel)]="contato.cpf">
+        </mat-form-field>
+      </div>
+  
+      <div class="col-md-3">
+        <mat-form-field class="col-md-12">
+          <input matInput [matDatepicker]="picker" placeholder="Data de aniversário" name="data_nascimento" [(ngModel)]="contato.data_nascimento">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+  
+      <div class="col-md-4">
+        <mat-form-field class="col-md-12">
+          <input matInput placeholder="Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher" name="email" [(ngModel)]="contato.email">
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Por favor insira um endereço de e-mail válido
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            E-mail é <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="col-md-3">
+        <mat-form-field class="Telefone col-md-12">
+          <input matInput placeholder="Telefone" type="tel" name="telefone" [(ngModel)]="contato.telefone">
+        </mat-form-field>  
+      </div>
+    </div>
+  
+    <div class="row">
+      <app-enderecos [enderecos]="contato.enderecos"></app-enderecos>
+    </div>
+    
+    <div class="col-md-12">
+      <div class="col-md-1 float-right">
+        <button mat-raised-button (click)="save()" color="primary"  class="col-md-12">
+          Salvar
+        </button>
+      </div>
+      <div class="col-md-1 float-right">
+        <button mat-raised-button (click)="goBack()" class="col-md-12">
+          Voltar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
